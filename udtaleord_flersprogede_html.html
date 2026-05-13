@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Svære danske ord at udtale</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #222222;
+      --muted: #5f5f5f;
+      --accent: #3f6f68;
+      --accent-dark: #2c4f4a;
+      --accent-light: #dce9e6;
+      --yellow: #f7d77b;
+      --rose: #f3c6bd;
+      --blue: #c9ddf0;
+      --green: #cfe7cf;
+      --border: #ded8cf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top left, #fff8e8 0, var(--bg) 34%, #f3efe8 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      padding: 2.4rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+
+    header::before {
+      width: 160px;
+      height: 160px;
+      left: -40px;
+      top: -40px;
+    }
+
+    header::after {
+      width: 220px;
+      height: 220px;
+      right: -80px;
+      bottom: -100px;
+    }
+
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.2rem;
+      position: relative;
+    }
+
+    header p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      position: relative;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.3rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .intro h2 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    .sound-visual {
+      background: var(--accent-light);
+      border-radius: 18px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .face {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 0.7rem;
+      background: #ffe0bd;
+      border: 4px solid #333;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .eye {
+      width: 12px;
+      height: 12px;
+      background: #222;
+      border-radius: 50%;
+      position: absolute;
+      top: 34px;
+    }
+
+    .eye.left { left: 30px; }
+    .eye.right { right: 30px; }
+
+    .mouth {
+      width: 46px;
+      height: 22px;
+      border: 4px solid #222;
+      border-top: none;
+      border-radius: 0 0 40px 40px;
+      position: absolute;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%);
+      background: #f08a8a;
+    }
+
+    .sound-waves {
+      display: flex;
+      justify-content: center;
+      gap: 0.25rem;
+      margin-top: 0.4rem;
+    }
+
+    .sound-waves span {
+      width: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      display: block;
+    }
+
+    .sound-waves span:nth-child(1) { height: 18px; }
+    .sound-waves span:nth-child(2) { height: 30px; }
+    .sound-waves span:nth-child(3) { height: 42px; }
+    .sound-waves span:nth-child(4) { height: 30px; }
+    .sound-waves span:nth-child(5) { height: 18px; }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filters button {
+      border: 1px solid var(--accent);
+      background: white;
+      color: var(--accent);
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .filters button.active,
+    .filters button:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .legend-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0.8rem;
+      display: flex;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .legend-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .legend-icon.soft { background: var(--rose); }
+    .legend-icon.cons { background: var(--yellow); }
+    .legend-icon.vowel { background: var(--blue); }
+    .legend-icon.sosu { background: var(--green); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      right: -28px;
+      top: -28px;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+      position: relative;
+    }
+
+    .word-block h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1.55rem;
+      color: var(--accent);
+    }
+
+    .visual-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      background: var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+
+    .syllables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin: 0.5rem 0 0.7rem;
+    }
+
+    .syllables span {
+      background: #f2f2f2;
+      border: 1px solid #ddd;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .sound-line {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0.35rem 0;
+    }
+
+    .sound-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-top: 0.7rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .practice {
+      margin-top: 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.3rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+    }
+
+    .practice h2 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    .practice-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      background: var(--accent-light);
+      border-radius: 16px;
+      padding: 1rem;
+      min-height: 120px;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .speak-btn {
+      margin-top: 0.9rem;
+      border: none;
+      background: var(--accent);
+      color: white;
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    .speak-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .speak-btn:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .intro {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      header, .filters, footer {
+        display: none;
+      }
+
+      body {
+        background: white;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      .card, .intro, .practice, .legend-item {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Svære danske ord at udtale</h1>
+    <p>En visuel træningsside for flersprogede elever, der vil øve danske lyde, stavelser og ord fra hverdag og SOSU-praksis.</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <h2>Sådan kan siden bruges</h2>
+        <p>Læs ordet højt. Se på stavelsesboblerne. Sig ordet langsomt først, og prøv derefter i en hel sætning.</p>
+        <p class="muted">Tip: Farver, ikoner og bobler hjælper med at gøre lydene mere synlige. Det vigtigste er, at man bliver forstået og tør øve sig.</p>
+      </div>
+      <div class="sound-visual" aria-label="Illustration af udtale">
+        <div class="face">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="mouth"></div>
+        </div>
+        <strong>Se lyden – sig ordet</strong>
+        <div class="sound-waves" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="legend" aria-label="Forklaring af ikoner">
+      <div class="legend-item">
+        <div class="legend-icon soft">ð</div>
+        <div><strong>Bløde lyde</strong><br><span class="muted">fx blødt d og r</span></div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-icon cons">sk</div>
+        <div><strong>Konsonanter</strong><br><span class="muted">flere lyde tæt sammen</span></div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-icon vowel">ø</div>
+        <div><strong>Vokaler</strong><br><span class="muted">fx y, ø, æ og å</span></div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-icon sosu">+</div>
+        <div><strong>SOSU-ord</strong><br><span class="muted">ord fra praksis</span></div>
+      </div>
+    </section>
+
+    <div class="filters" aria-label="Filtrer ord">
+      <button class="active" onclick="filterCards('alle', this)">Alle</button>
+      <button onclick="filterCards('bløde-lyde', this)">Bløde lyde</button>
+      <button onclick="filterCards('konsonanter', this)">Konsonanter</button>
+      <button onclick="filterCards('vokaler', this)">Vokaler</button>
+      <button onclick="filterCards('sosu', this)">SOSU-ord</button>
+    </div>
+
+    <section class="grid" id="wordGrid">
+      <article class="card" data-category="bløde-lyde vokaler">
+        <div class="topline">
+          <div class="word-block">
+            <h3>rødgrød</h3>
+            <span class="tag">Bløde lyde + vokaler</span>
+          </div>
+          <div class="visual-icon">🥣</div>
+        </div>
+        <div class="syllables"><span>rød</span><span>grød</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: ø, blødt d og r-lyd.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Jeg spiser rødgrød med mælk.</p>
+        <button class="speak-btn" onclick="speakWord('rødgrød')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="bløde-lyde">
+        <div class="topline">
+          <div class="word-block">
+            <h3>mad</h3>
+            <span class="tag">Blødt d</span>
+          </div>
+          <div class="visual-icon">🍽️</div>
+        </div>
+        <div class="syllables"><span>ma</span><span>d</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: det bløde d til sidst i ordet.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Borgeren har spist sin mad.</p>
+        <button class="speak-btn" onclick="speakWord('mad')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="bløde-lyde sosu">
+        <div class="topline">
+          <div class="word-block">
+            <h3>medicin</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">💊</div>
+        </div>
+        <div class="syllables"><span>me</span><span>di</span><span>CIN</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: tryk på sidste del: me-di-CIN.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Jeg hjælper borgeren med medicin.</p>
+        <button class="speak-btn" onclick="speakWord('medicin')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="konsonanter sosu vokaler">
+        <div class="topline">
+          <div class="word-block">
+            <h3>sygepleje</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">🩺</div>
+        </div>
+        <div class="syllables"><span>sy</span><span>ge</span><span>ple</span><span>je</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: y-lyd og sammensat ord.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Sygepleje handler om omsorg og faglighed.</p>
+        <button class="speak-btn" onclick="speakWord('sygepleje')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="konsonanter">
+        <div class="topline">
+          <div class="word-block">
+            <h3>skraldespand</h3>
+            <span class="tag">Konsonanter</span>
+          </div>
+          <div class="visual-icon">🗑️</div>
+        </div>
+        <div class="syllables"><span>skral</span><span>de</span><span>spand</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: flere konsonanter i samme ord.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Jeg tømmer skraldespanden.</p>
+        <button class="speak-btn" onclick="speakWord('skraldespand')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="vokaler">
+        <div class="topline">
+          <div class="word-block">
+            <h3>hygge</h3>
+            <span class="tag">Vokaler</span>
+          </div>
+          <div class="visual-icon">☕</div>
+        </div>
+        <div class="syllables"><span>hyg</span><span>ge</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: y-lyden og kort udtale.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Vi skaber hygge i fællesrummet.</p>
+        <button class="speak-btn" onclick="speakWord('hygge')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="vokaler konsonanter">
+        <div class="topline">
+          <div class="word-block">
+            <h3>skyld</h3>
+            <span class="tag">Vokaler + konsonanter</span>
+          </div>
+          <div class="visual-icon">💬</div>
+        </div>
+        <div class="syllables"><span>skyld</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: y-lyd og konsonanterne sk.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Det var ikke din skyld.</p>
+        <button class="speak-btn" onclick="speakWord('skyld')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="bløde-lyde sosu vokaler">
+        <div class="topline">
+          <div class="word-block">
+            <h3>pårørende</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">👥</div>
+        </div>
+        <div class="syllables"><span>på</span><span>rør</span><span>en</span><span>de</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: å-lyd, r-lyd og endelsen -ende.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Vi taler respektfuldt med de pårørende.</p>
+        <button class="speak-btn" onclick="speakWord('pårørende')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="konsonanter sosu">
+        <div class="topline">
+          <div class="word-block">
+            <h3>journal</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">📋</div>
+        </div>
+        <div class="syllables"><span>jour</span><span>NAL</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: j-lyd og tryk på sidste stavelse.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Jeg skriver observationen i borgerens journal.</p>
+        <button class="speak-btn" onclick="speakWord('journal')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="vokaler sosu konsonanter">
+        <div class="topline">
+          <div class="word-block">
+            <h3>væske</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">💧</div>
+        </div>
+        <div class="syllables"><span>væ</span><span>ske</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: æ-lyd og sk-lyd.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>Borgeren skal have nok væske i løbet af dagen.</p>
+        <button class="speak-btn" onclick="speakWord('væske')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="bløde-lyde sosu vokaler">
+        <div class="topline">
+          <div class="word-block">
+            <h3>tryghed</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">🤝</div>
+        </div>
+        <div class="syllables"><span>tryg</span><span>hed</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: y-lyd og blødt d til sidst.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>En rolig stemme kan skabe tryghed.</p>
+        <button class="speak-btn" onclick="speakWord('tryghed')">🔊 Hør ordet</button>
+      </article>
+
+      <article class="card" data-category="konsonanter sosu">
+        <div class="topline">
+          <div class="word-block">
+            <h3>observation</h3>
+            <span class="tag">SOSU-ord</span>
+          </div>
+          <div class="visual-icon">👁️</div>
+        </div>
+        <div class="syllables"><span>ob</span><span>ser</span><span>va</span><span>TION</span></div>
+        <div class="sound-line"><span class="sound-dot"></span><span>Fokus: langt ord med flere stavelser.</span></div>
+        <p class="label">Øvesætning:</p>
+        <p>En observation skal være præcis og objektiv.</p>
+        <button class="speak-btn" onclick="speakWord('observation')">🔊 Hør ordet</button>
+      </article>
+    </section>
+
+    <section class="practice">
+      <h2>Miniøvelse</h2>
+      <p>Brug modellen herunder som en lille mundtlig aktivitet:</p>
+      <div class="practice-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <strong>Se</strong>
+          <p>Se på ikonet, ordet og stavelsesboblerne.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <strong>Sig</strong>
+          <p>Sig ordet langsomt tre gange.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <strong>Lyt</strong>
+          <p>Læs øvesætningen for en makker.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <strong>Brug</strong>
+          <p>Lav din egen SOSU-sætning med ordet.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Lavet som visuel HTML-side til udtaletræning.
+  </footer>
+
+  <script>
+    function speakWord(word) {
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'da-DK';
+      utterance.rate = 0.8;
+      utterance.pitch = 1;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
+    }
+
+    function filterCards(category, button) {
+      const cards = document.querySelectorAll('.card');
+      const buttons = document.querySelectorAll('.filters button');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      cards.forEach(card => {
+        const categories = card.dataset.category;
+        if (category === 'alle' || categories.includes(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
